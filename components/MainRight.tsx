@@ -3,6 +3,10 @@ import { highlightsConfig } from "./highlightConfig"
 import SubTile from "./SubTile"
 
 function MainRight({ weatherData }: { weatherData: any }) {
+  
+  console.log("Weather data : ", weatherData);
+  
+
   if (!weatherData) return null
 
   const tiles = highlightsConfig(weatherData)
@@ -20,12 +24,8 @@ function MainRight({ weatherData }: { weatherData: any }) {
                 : ""
             }
           >
-
             <SubTile 
-              title={tile.title}
-              imageSRC={tile.imageSRC}
-              data={tile.data}
-              unit={tile.unit}
+              {...tile}
             />
           </div>
         ))}

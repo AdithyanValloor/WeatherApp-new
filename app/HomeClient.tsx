@@ -13,9 +13,6 @@ export default function HomeClient({initialData}:{initialData:any}) {
   const [weather, setWeather] = useState<any>(initialData)
   const [loadingWeather, setLoadingWeather] = useState(false)
 
-  console.log("WEATHER : ", weather);
-  
-  // Disable scrolling when modal or loading
   useEffect(() => {
     if (isOpen || loadingWeather) {
       document.body.style.overflow = "hidden"
@@ -26,8 +23,6 @@ export default function HomeClient({initialData}:{initialData:any}) {
 
   // Map weather types to Tailwind gradient classes
   const getBackgroundGradient = () => {
-
-    console.log("BG : ", weather);
     
     const main = weather?.description?.toLowerCase() || "";
     if (main.includes("rain")) return "from-blue-200 to-gray-700";

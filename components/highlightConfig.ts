@@ -1,47 +1,56 @@
-export const highlightsConfig = (weather: any) => [
+import { SubTileProps } from "./SubTile"
+
+export const highlightsConfig = (weather: any): SubTileProps[] => [
   {
+    kind: "generic" as const,
     title: "Feels Like",
     data: weather.feelsLike,
     unit: "°C",
     imageSRC: "/svg/thermometer.svg",
   },
   {
+    kind: "generic" as const,
     title: "Humidity",
     data: weather.humidity,
     unit: "%",
     imageSRC: "/svg/humidity.svg",
   },
   {
+    kind: "generic" as const,
     title: "Pressure",
     data: weather.pressure,
     unit: "hPa",
     imageSRC: "/svg/barometer.svg",
   },
   {
+    kind: "generic" as const,
     title: "Wind Speed",
     data: weather.windSpeed,
     unit: "km/h",
     imageSRC: "/svg/windsock.svg",
   },
   {
-    title: "Visbility",
+    kind: "generic" as const,
+    title: "Visibility", 
     data: weather.visibility,
     unit: "km",
     imageSRC: "/svg/view.svg",
   },
   {
-    title: "Sunrise and Sunset",
-    data:{ 
-        sunrise: new Date(weather.sunrise * 1000).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-        sunset: new Date(weather.sunset * 1000).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    kind: "sun" as const,
+    title: "Sunrise and Sunset" as const,
+    data: { 
+      sunrise: new Date(weather.sunrise * 1000).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      sunset: new Date(weather.sunset * 1000).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     },
-    imageSRC:{ 
-        sunrise: "/svg/sunrise.svg",
-        sunset: "/svg/sunset.svg",
+    imageSRC: { 
+      sunrise: "/svg/sunrise.svg",
+      sunset: "/svg/sunset.svg",
     }
   },
   {
-    title: "Air Quality",
+    kind: "air" as const,
+    title: "Air Quality" as const,
     data: {
       co: weather.airQuality.co,
       o3: weather.airQuality.o3,
@@ -58,5 +67,4 @@ export const highlightsConfig = (weather: any) => [
     },
     imageSRC: "/svg/wind.svg",
   },
-
 ]
