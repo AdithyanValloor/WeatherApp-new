@@ -4,9 +4,6 @@ import SubTile from "./SubTile"
 
 function MainRight({ weatherData }: { weatherData: any }) {
   
-  console.log("Weather data : ", weatherData);
-  
-
   if (!weatherData) return null
 
   const tiles = highlightsConfig(weatherData)

@@ -8,8 +8,6 @@ function MainLeft({weatherData}:{weatherData: any}) {
     return <div className="flex justify-center items-center">Loading...</div>
   }
 
-  console.log("Weather fo ----- :", weatherData.forecast);
-  
   return (
     <div className="w-full h-full lg:px-5 rounded-2xl flex flex-col ">
       <div className="flex flex-col pt-5 h-3/5 justify-center items-center">

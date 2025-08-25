@@ -46,9 +46,6 @@ export default function SearchSlide({
       const res = await fetch(`/api/suggestions?text=${query}`)
       const data: SuggestionsResponse = await res.json()
 
-      console.log("DATA : ", data);
-      
-
       let results: Suggestion[] = data.features.map((f) => ({
         ...f.properties,
         coordinates: f.geometry?.coordinates,
@@ -65,9 +62,7 @@ export default function SearchSlide({
           })
         ).values()
       )
-      
-      console.log("UNIQUE : ", unique);
-      
+
       setSuggestions(unique)
     
     } catch (err) {
@@ -98,16 +93,12 @@ async function handleSelect(s: Suggestion) {
   handleClose()
   if (s.coordinates) {
     const [lon, lat] = s.coordinates
-    console.log("Clicked:", s.city, s.state || s.county, lat, lon)
     setLoadingWeather?.(true)
     try {
       const res = await fetch(`/api/weatherdata?lat=${lat}&lon=${lon}`)
       if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`)
 
       const data = await res.json()
-
-      console.log("DATA RES: ", data);
-      
 
       const finalData = formatWeather({
         ...data,
@@ -116,9 +107,6 @@ async function handleSelect(s: Suggestion) {
         country: s.country,
         coordinates: { lat, lon },
       });
-
-
-      console.log("Final data:", finalData) 
 
       onWeatherFetched?.(finalData) 
     } catch (err) {

@@ -13,9 +13,6 @@ export default async function Home() {
 
   const data = await res.json()
   
-  console.log("DATA RES: ", data);
-  
-
   const finalData = formatWeather({
     ...data,
     city: "Kochi",

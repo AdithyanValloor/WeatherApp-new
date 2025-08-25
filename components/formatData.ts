@@ -93,15 +93,9 @@ function processForecast(data: ForecastItem[]): DailySummary[] {
 
 
 export function formatWeather(raw: any) {
-    
-    console.log("RAW : ", raw);
 
     const dateAndTime = getDate(raw.timezone)
     const forecast = processForecast(raw.list)
-
-    console.log("FORCAST : ", forecast);
-    
-    
 
   if (!raw) return null;
 
