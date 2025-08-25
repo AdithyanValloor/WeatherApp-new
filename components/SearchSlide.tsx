@@ -3,7 +3,6 @@ import { motion } from "framer-motion"
 import { Search, X } from "lucide-react"
 import { useState, useRef } from "react"
 import { formatWeather } from "./formatData"
-import { tr } from "framer-motion/client"
 
 type Suggestion = {
   city: string
