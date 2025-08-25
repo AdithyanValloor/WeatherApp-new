@@ -7,7 +7,7 @@ export default async function Home() {
   const lat= 9.9399
   
   const res = await fetch(
-    `/api/weatherdata?lat=${lat}&lon=${lon}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/weatherdata?lat=${lat}&lon=${lon}`,
     { cache: "no-store" } 
   )
 
