@@ -6,6 +6,7 @@ import SearchButton from "@/components/SearchButton";
 import SearchSlide from "@/components/SearchSlide";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { formatWeather } from "@/components/formatData";
 
 export default function HomeClient({initialData}:{initialData:any}) {
   
@@ -23,9 +24,44 @@ export default function HomeClient({initialData}:{initialData:any}) {
   }, [isOpen, loadingWeather])
 
   useEffect(() => {
+    if (navigator.geolocation) {
+      setLoadingWeather(true)
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const lat = pos.coords.latitude
+          const lon = pos.coords.longitude
+          
+          try {
+            const res = await fetch(
+              `${process.env.NEXT_PUBLIC_BASE_URL}/api/weatherdata?lat=${lat}&lon=${lon}`
+            );
+            if (!res.ok) throw new Error("Weather fetch failed")
+
+            const data = await res.json()
+            const finalData = formatWeather({
+              ...data,
+              coordinates: { lat, lon }
+            });
+
+            setWeather(finalData)
+          } catch (err) {
+            console.error("Weather fetch error:", err)
+          } finally {
+            setLoadingWeather(false)
+          }
+        },
+        (err) => {
+          console.warn("Geolocation denied or unavailable:", err)
+          setLoadingWeather(false)
+        }
+      );
+    }
+  }, []);
+  
+  useEffect(() => {
     const handlePopState = () => {
       if (isOpen) {
-        setIsOpen(false); // Close slide instead of going back
+        setIsOpen(false);
       }
     };
 

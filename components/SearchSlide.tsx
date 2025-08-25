@@ -129,7 +129,7 @@ async function handleSelect(s: Suggestion) {
       animate={{ x: isOpen ? 0 : "100%" }}
       exit={{ x: "100%" }}
       transition={{ duration: 0.1, ease: "easeInOut" }}
-      className="fixed top-0 right-0 w-100 h-full px-5 bg-white shadow-2xl z-30"
+      className="fixed top-0 right-0 w-100 h-full px-5 bg-white shadow-md z-30"
     >
       <div>
         <button
