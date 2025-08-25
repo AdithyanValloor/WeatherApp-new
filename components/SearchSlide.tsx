@@ -129,18 +129,18 @@ async function handleSelect(s: Suggestion) {
       animate={{ x: isOpen ? 0 : "100%" }}
       exit={{ x: "100%" }}
       transition={{ duration: 0.1, ease: "easeInOut" }}
-      className="fixed top-0 right-0 w-100 h-full px-5 bg-white shadow-2xl z-40"
+      className="fixed top-0 right-0 w-100 h-full px-5 bg-white shadow-2xl z-30"
     >
       <div>
         <button
           type="button"
           onClick={handleClose}
-          className="p-3 cursor-pointer hover:rotate-180 transition-all rounded-full ease-in-out duration-300 absolute top-0 left-0"
+          className="p-3 cursor-pointer hover:rotate-180 transition-all rounded-full ease-in-out duration-300 absolute top-0 left-0 z-50"
         >
           <X strokeWidth={1} size={30} />
         </button>
 
-        <div className="rounded-full mt-18 px-3 gap-3 flex py-2 shadow items-center overflow-hidden max-w-md mx-auto">
+        <div className="rounded-full mt-18 px-3 gap-3 flex py-2 shadow-md items-center overflow-hidden max-w-md mx-auto">
           <div className="h-full flex justify-center items-center">
             <Search strokeWidth={1} />
           </div>

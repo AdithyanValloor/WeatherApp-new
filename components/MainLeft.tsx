@@ -10,7 +10,7 @@ function MainLeft({weatherData}:{weatherData: any}) {
 
   return (
     <div className="w-full h-full lg:px-5 rounded-2xl flex flex-col ">
-      <div className="flex flex-col pt-5 h-3/5 justify-center items-center">
+      <div className="flex flex-col pt-7 h-3/5 justify-center items-center">
         <div>
           <div>
             <div>

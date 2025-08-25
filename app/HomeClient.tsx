@@ -16,10 +16,26 @@ export default function HomeClient({initialData}:{initialData:any}) {
   useEffect(() => {
     if (isOpen || loadingWeather) {
       document.body.style.overflow = "hidden"
+      window.history.pushState({ searchOpen: true }, "");
     } else {
       document.body.style.overflow = "auto"
     }
   }, [isOpen, loadingWeather])
+
+  useEffect(() => {
+    const handlePopState = () => {
+      if (isOpen) {
+        setIsOpen(false); // Close slide instead of going back
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [isOpen]);
+
 
   // Map weather types to Tailwind gradient classes
   const getBackgroundGradient = () => {
@@ -43,8 +59,8 @@ export default function HomeClient({initialData}:{initialData:any}) {
         className={`absolute inset-0 -z-10 bg-gradient-to-r ${getBackgroundGradient()}`}
       />
 
-      <div className="flex justify-center items-center w-full relative z-10">
-        <h1 id="title" className={`text-3xl text-center ${isOpen? "text-black" : "text-white"} transition-colors duration-500 ease-in-out md:text-white z-50 py-4`}>Weather Now</h1>
+      <div className="flex justify-center items-center w-full relative">
+        <h1 id="title" className={`text-3xl text-center ${isOpen? "text-black" : "text-white"} transition-colors duration-500 ease-in-out md:text-white py-4`}>Weather Now</h1>
         <div className="absolute text-white right-10 z-50">
           <SearchButton onToggle={() => setIsOpen(prev => !prev)}/>
         </div>
@@ -52,8 +68,8 @@ export default function HomeClient({initialData}:{initialData:any}) {
 
       {/* Loading overlay */}
       {loadingWeather && (
-        <div className="absolute inset-0 z-50 flex justify-center items-center bg-black/30 pointer-events-auto">
-          <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        <div className="absolute inset-0 z-50 flex justify-center items-center bg-black/30 backdrop-blur-sm  pointer-events-auto">
+          <div className="w-16 h-16 border-4  border-white border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
 
